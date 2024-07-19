@@ -9,11 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            Button {
+                //notificacao
+            } label: {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.white)
+                    .frame(width: 250, height: 50)
+                    .overlay(Text("Lançar Notificação"))
+                        .foregroundStyle(.black)
+                        .font(.title2)
+            }
         }
         .padding()
     }
