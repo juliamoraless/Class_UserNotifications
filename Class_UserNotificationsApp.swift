@@ -12,6 +12,10 @@ struct Class_UserNotificationsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//                .onAppear {
+//                    NotificationManager.object.requestAuthorization()
+//                }
         }
+        
     }
 }
