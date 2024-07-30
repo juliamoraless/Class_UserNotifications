@@ -13,9 +13,8 @@ struct Class_UserNotificationsApp: App {
         WindowGroup {
             ContentView()
 //                .onAppear {
-//                    NotificationManager.object.requestAuthorization()
+//                    NotificationManager.checkAuthorization()
 //                }
         }
-        
     }
 }

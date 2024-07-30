@@ -9,12 +9,12 @@ import Foundation
 import UserNotifications
 
 class NotificationManager {
-    static let object = NotificationManager()
+//    static let object = NotificationManager()
+//    
+//    private init() { }
     
-    private init() { }
-    
-    func requestAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (sucess, error) in
+    static func requestAuthorization() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { success, error in
             if let error = error {
                 print("Error: \(error)")
             } else {
@@ -23,7 +23,22 @@ class NotificationManager {
         }
     }
     
-    func scheduleNotification() {
+    static func checkAuthorization() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                print("Permissão concedida")
+            case .denied:
+                print("Permissão negada, autorize nos ajustes")
+            case .notDetermined:
+                self.requestAuthorization()
+            default:
+                print("")
+            }
+        }
+    }
+    
+     static func scheduleNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Primeira notificação!"
         content.subtitle = "Sua primeira notificação foi criada"
@@ -36,3 +51,9 @@ class NotificationManager {
         UNUserNotificationCenter.current().add(request)
     }
 }
+
+
+
+
+
+

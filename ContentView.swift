@@ -12,33 +12,50 @@ struct ContentView: View {
         VStack {
             Text("Notificações")
                 .font(.largeTitle)
-            ButtonComponent(label: "Solicitar Autorização", function: {
-                NotificationManager.object.requestAuthorization()
+//            Button("") {
+//                NotificationManager.object.requestAuthorization()
+//            }
+//            .buttonStyle(ButtonStyleJulia(label: "Solicitar autorizacao "))
+            ButtonComponent(text: "Solicitar Autorização", action: {
+                NotificationManager.checkAuthorization()
             })
-            ButtonComponent(label: "Agendar Notificação", function: {
-                NotificationManager.object.scheduleNotification()
+            ButtonComponent(text: "Agendar Notificação", action: {
+                NotificationManager.checkAuthorization()
+                NotificationManager.scheduleNotification()
             })
         }
     }
 }
 
 struct ButtonComponent: View {
-    var label: String
-    var function: () -> Void
+    var text: String
+    var action: () -> Void
     
     var body: some View {
-        Button(action: function, label: {
+        Button(action: action, label: {
             RoundedRectangle(cornerRadius: 10)
                 .fill(.black)
                 .frame(width: 250, height: 50)
-                .overlay(Text(label))
+                .overlay(Text(text))
                 .foregroundStyle(.white)
                 .bold()
                 .font(.title3)
         })
     }
 }
-
+//struct ButtonStyleJulia: ButtonStyle {
+//    var label: String
+//    
+//    func makeBody(configuration: Configuration) -> some View {
+//        RoundedRectangle(cornerRadius: 10)
+//            .fill(.black)
+//            .frame(width: 250, height: 50)
+//            .overlay(Text(label))
+//            .foregroundStyle(.white)
+//            .bold()
+//            .font(.title3)
+//    }
+//}
 
 #Preview {
     ContentView()
